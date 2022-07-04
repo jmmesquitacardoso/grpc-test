@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "test.me/grpc_server/user_service_model/user";
+
+service UserInternalService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
+
+message CreateUserRequest {
+    string name = 1;
+    string full_name = 2;
+    repeated string aliases = 3;
+}
+
+message UserResponsePayload {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    UserResponsePayload payload = 1;
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+message GetUserResponse {
+    UserResponsePayload payload = 1;
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string full_name = 3;
+    repeated string aliases = 4;
+}
